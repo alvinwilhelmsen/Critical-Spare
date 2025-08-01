@@ -193,6 +193,11 @@ if ( $status -eq 1 ){
   ON load_BASS_MTRLSTOCK.MTRL_ITEM_ID = load_BASS_MATERIAL.MTRL_ITEM_ID 
   and load_BASS_MTRLSTOCK.VESSEL_ID = load_BASSxVESSELCOMPONENTMATERIAL.VESSEL_ID
   and load_BASS_MTRLSTOCK.REC_DELETED = 0
+
+left join [TABLEOWNER].[load_BASS_VESSEL] load_BASS_VESSEL
+  on load_bass_VESSEL.vessel_id=load_BASS_VESSELMATERIAL.vessel_id
+  and load_bass_vessel.rec_deleted=0
+
   WHERE 
       load_BASS_MATERIAL.REC_DELETED = 0
       AND load_BASS_MATERIAL.CATEGORY_ID = 1210
@@ -208,7 +213,7 @@ if ( $status -eq 1 ){
           )
       )
   
-  AND load_BASSxVESSELCOMPONENTMATERIAL.COMPONENT_ID = '352.021' 
+
       AND load_BASS_VESSELMATERIAL.MTRL_CRITICALITY_CODE IS NOT NULL;
   ;
 "@
